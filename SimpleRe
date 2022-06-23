@@ -1,0 +1,20 @@
+--Simple RE Script
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+    if v:IsA("Accessory") then
+        v.Handle.Anchored = true
+    end
+end
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+local Human = game.Players.LocalPlayer.Character.Humanoid
+local NewHuman = Human:Clone()
+NewHuman.Parent = game.Players.LocalPlayer.Character
+Human:Destroy()
+local SavedPos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+local Refreshed = false
+game.Players.LocalPlayer.CharacterAdded:Connect(function()
+    if Refreshed == false then
+        Refreshed = true
+        wait(0.1)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = SavedPos
+    end
+end)
